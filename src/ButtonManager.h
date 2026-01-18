@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 
-class ButtonController {
+class ButtonManager {
 public:
-    ButtonController(int button1Pin, int button2Pin, int button3Pin);
+    ButtonManager(int button1Pin, int button2Pin, int button3Pin);
 
     void begin();
     void update();

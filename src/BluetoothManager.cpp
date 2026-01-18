@@ -1,4 +1,4 @@
-#include "bluetooth_controller.h"
+#include "BluetoothManager.h"
 
 NimBLEServer* server;
 NimBLECharacteristic* inputReport;
@@ -62,11 +62,12 @@ static const uint8_t reportMap[] = {
     0xC0               // END_COLLECTION
 };
 
-void BluetoothController::begin() {
+void BluetoothManager::begin() {
     begin("ESP32-C3 BLE Keyboard");
 }
 
-void BluetoothController::begin(std::string device_name) {
+void BluetoothManager::begin(std::string device_name) {
+
     NimBLEDevice::init(device_name);
     server = NimBLEDevice::createServer();
 
@@ -100,7 +101,7 @@ void BluetoothController::begin(std::string device_name) {
     adv->start();
 }
 
-void BluetoothController::sendKey(uint8_t keycode) {
+void BluetoothManager::sendKey(uint8_t keycode) {
     uint8_t report[8] = {0};
     report[2] = keycode; // posición del keycode
 
@@ -114,7 +115,7 @@ void BluetoothController::sendKey(uint8_t keycode) {
     inputReport->notify();
 }
 
-void BluetoothController::sendConsumerControl(uint8_t command) {
+void BluetoothManager::sendConsumerControl(uint8_t command) {
     uint8_t report[3];
 
     report[0] = 0x02;       // Report ID 2 (Consumer Control)

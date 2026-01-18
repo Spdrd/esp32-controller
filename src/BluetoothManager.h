@@ -11,7 +11,7 @@
 #define CC_STOP            0xB7
 #define CC_MUTE            0xE2
 
-class BluetoothController {
+class BluetoothManager {
 public:
     void begin();
     void begin(std::string device_name);

@@ -1,21 +1,21 @@
-#include "Button_controller.h"
+#include "ButtonController.h"
 
-ButtonController::ButtonController(int button1Pin, int button2Pin, int button3Pin)
+ButtonManager::ButtonManager(int button1Pin, int button2Pin, int button3Pin)
     : button1Pin(button1Pin), button2Pin(button2Pin), button3Pin(button3Pin) {}
 
-void ButtonController::begin() {
+void ButtonManager::begin() {
     pinMode(button1Pin, INPUT_PULLUP);
     pinMode(button2Pin, INPUT_PULLUP);
     pinMode(button3Pin, INPUT_PULLUP);
 }
 
-void ButtonController::update() {
+void ButtonManager::update() {
     currentTime = millis();
     processInputs();
     executeActions();
 }
 
-void ButtonController::processInputs() {
+void ButtonManager::processInputs() {
     bool currentButton1 = digitalRead(button1Pin) == LOW;
     button2Pressed = digitalRead(button2Pin) == LOW;
     button3Pressed = digitalRead(button3Pin) == LOW;
@@ -41,7 +41,7 @@ void ButtonController::processInputs() {
     if (!button2Pressed) button2HoldCounter = 0;
 }
 
-void ButtonController::executeActions() {
+void ButtonManager::executeActions() {
     if (button1Pressed && button2Pressed) {
         if (cbButton2_Button1) cbButton2_Button1();
         tapCountButton1 = 0;
@@ -84,10 +84,10 @@ void ButtonController::executeActions() {
 
 /* ---------------- Callback setters ---------------- */
 
-void ButtonController::onDoubleButton1Tap(void (*callback)()) { cbDoubleButton1Tap = callback; }
-void ButtonController::onButton3(void (*callback)()) { cbButton3 = callback; }
-void ButtonController::onButton2(void (*callback)()) { cbButton2 = callback; }
-void ButtonController::onButton2_Button1(void (*callback)()) { cbButton2_Button1 = callback; }
-void ButtonController::onButton3_Button1(void (*callback)()) { cbButton3_Button1 = callback; }
-void ButtonController::onTripleTap(void (*callback)()) { cbTripleTap = callback; }
-void ButtonController::onQuadTap(void (*callback)()) { cbQuadTap = callback; }
+void ButtonManager::onDoubleButton1Tap(void (*callback)()) { cbDoubleButton1Tap = callback; }
+void ButtonManager::onButton3(void (*callback)()) { cbButton3 = callback; }
+void ButtonManager::onButton2(void (*callback)()) { cbButton2 = callback; }
+void ButtonManager::onButton2_Button1(void (*callback)()) { cbButton2_Button1 = callback; }
+void ButtonManager::onButton3_Button1(void (*callback)()) { cbButton3_Button1 = callback; }
+void ButtonManager::onTripleTap(void (*callback)()) { cbTripleTap = callback; }
+void ButtonManager::onQuadTap(void (*callback)()) { cbQuadTap = callback; }
