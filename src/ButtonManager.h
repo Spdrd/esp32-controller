@@ -3,9 +3,29 @@
 
 #include <Arduino.h>
 
+struct ButtonPinConfig
+{
+    int button1Pin;
+    int button2Pin;
+    int button3Pin;
+};
+
+struct ButtonActionCallbacks
+{
+    void (*onDoubleButton1Tap)() = nullptr;
+    void (*onButton3)() = nullptr;
+    void (*onButton2)() = nullptr;
+    void (*onButton2_Button1)() = nullptr;
+    void (*onButton3_Button1)() = nullptr;
+    void (*onTripleTap)() = nullptr;
+    void (*onQuadTap)() = nullptr;
+};
+
+// Buton actio calllback type definitions
+
 class ButtonManager {
 public:
-    ButtonManager(int button1Pin, int button2Pin, int button3Pin);
+    ButtonManager(ButtonPinConfig config);
 
     void begin();
     void update();
@@ -18,7 +38,9 @@ public:
     void onButton3_Button1(void (*callback)());
     void onTripleTap(void (*callback)());
     void onQuadTap(void (*callback)());
-
+    
+    // Set all callbacks at once
+    void setCallbacks(ButtonActionCallbacks callbacks);
 private:
     // Pins
     int button1Pin;

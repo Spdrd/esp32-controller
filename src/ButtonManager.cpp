@@ -1,7 +1,8 @@
-#include "ButtonController.h"
+#include "ButtonManager.h"
 
-ButtonManager::ButtonManager(int button1Pin, int button2Pin, int button3Pin)
-    : button1Pin(button1Pin), button2Pin(button2Pin), button3Pin(button3Pin) {}
+
+ButtonManager::ButtonManager(ButtonPinConfig config)
+    : button1Pin(config.button1Pin), button2Pin(config.button2Pin), button3Pin(config.button3Pin) {}
 
 void ButtonManager::begin() {
     pinMode(button1Pin, INPUT_PULLUP);
@@ -83,6 +84,16 @@ void ButtonManager::executeActions() {
 }
 
 /* ---------------- Callback setters ---------------- */
+
+void ButtonManager::setCallbacks(ButtonActionCallbacks callbacks) {
+    cbDoubleButton1Tap = callbacks.onDoubleButton1Tap;
+    cbButton3 = callbacks.onButton3;
+    cbButton2 = callbacks.onButton2;
+    cbButton2_Button1 = callbacks.onButton2_Button1;
+    cbButton3_Button1 = callbacks.onButton3_Button1;
+    cbTripleTap = callbacks.onTripleTap;
+    cbQuadTap = callbacks.onQuadTap;
+}
 
 void ButtonManager::onDoubleButton1Tap(void (*callback)()) { cbDoubleButton1Tap = callback; }
 void ButtonManager::onButton3(void (*callback)()) { cbButton3 = callback; }
