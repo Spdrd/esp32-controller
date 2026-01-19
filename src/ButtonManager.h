@@ -43,9 +43,7 @@ public:
     void setCallbacks(ButtonActionCallbacks callbacks);
 private:
     // Pins
-    int button1Pin;
-    int button2Pin;
-    int button3Pin;
+    ButtonPinConfig config;
 
     // States
     bool button1Pressed = false;

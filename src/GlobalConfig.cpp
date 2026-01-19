@@ -7,10 +7,20 @@ ButtonPinConfig buttonConfig = {
     BUTTON3_PIN
 };
 
+// --- SCREEN CONFIG ---
+ScreenPinConfig screenConfig = {
+    -1,
+    -1,
+    -1,
+    TFT_DC,
+    TFT_MOSI,
+    TFT_SCLK
+};
+
 // --- MANAGERS INSTANCES ---
 BluetoothManager bleKeyboard;
 ButtonManager buttons(buttonConfig);
-
+ScreenManager screen(screenConfig);
 void (*playPauseCallback)() = []() {
         Serial.println("Play/Pause");
         bleKeyboard.sendConsumerControl(CC_PLAY_PAUSE);

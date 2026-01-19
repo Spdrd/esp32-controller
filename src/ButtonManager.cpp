@@ -1,13 +1,12 @@
 #include "ButtonManager.h"
 
 
-ButtonManager::ButtonManager(ButtonPinConfig config)
-    : button1Pin(config.button1Pin), button2Pin(config.button2Pin), button3Pin(config.button3Pin) {}
+ButtonManager::ButtonManager(ButtonPinConfig config) : config(config) {}
 
 void ButtonManager::begin() {
-    pinMode(button1Pin, INPUT_PULLUP);
-    pinMode(button2Pin, INPUT_PULLUP);
-    pinMode(button3Pin, INPUT_PULLUP);
+    pinMode(config.button1Pin, INPUT_PULLUP);
+    pinMode(config.button2Pin, INPUT_PULLUP);
+    pinMode(config.button3Pin, INPUT_PULLUP);
 }
 
 void ButtonManager::update() {
@@ -17,9 +16,9 @@ void ButtonManager::update() {
 }
 
 void ButtonManager::processInputs() {
-    bool currentButton1 = digitalRead(button1Pin) == LOW;
-    button2Pressed = digitalRead(button2Pin) == LOW;
-    button3Pressed = digitalRead(button3Pin) == LOW;
+    bool currentButton1 = digitalRead(config.button1Pin) == LOW;
+    button2Pressed = digitalRead(config.button2Pin) == LOW;
+    button3Pressed = digitalRead(config.button3Pin) == LOW;
 
     if (currentButton1 != lastButton1State) {
         lastDebounceTimeButton1 = currentTime;

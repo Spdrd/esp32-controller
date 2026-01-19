@@ -19,4 +19,5 @@ void setup() {
 
 void loop() {
     buttons.update();
+    screen.loop();
 }
