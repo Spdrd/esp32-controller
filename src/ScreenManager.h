@@ -14,7 +14,8 @@ struct ScreenPinConfig
 class ScreenManager {
 public:
     ScreenManager(ScreenPinConfig config);
-    void loop();
+    void begin();
+    void update(String text);
 
 private:
     ScreenPinConfig config;

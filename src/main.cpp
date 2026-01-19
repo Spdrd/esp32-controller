@@ -15,9 +15,9 @@ void setup() {
     // Init buttons
     buttons.begin();
     buttons.setCallbacks(setupMusicControllerActions());
+    screen.begin();
 }
 
 void loop() {
     buttons.update();
-    screen.loop();
 }

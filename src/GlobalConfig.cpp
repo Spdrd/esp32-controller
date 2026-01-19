@@ -23,29 +23,34 @@ ButtonManager buttons(buttonConfig);
 ScreenManager screen(screenConfig);
 void (*playPauseCallback)() = []() {
         Serial.println("Play/Pause");
+        screen.update("Play/Pause");
         bleKeyboard.sendConsumerControl(CC_PLAY_PAUSE);
     };
 
 void (*nextTrackCallback)() = []() {
         Serial.println("Next Track");
+        screen.update("Next Track");
         bleKeyboard.sendConsumerControl(CC_NEXT_TRACK);
         delay(BUTTON_COOLDOWN_MS);
     };
 
 void (*previousTrackCallback)() = []() {
         Serial.println("Previous Track");
+        screen.update("Previous Track");
         bleKeyboard.sendConsumerControl(CC_PREV_TRACK);
         delay(BUTTON_COOLDOWN_MS);
     };
 
 void (*volumeUpCallback)() = []() {
         Serial.println("Volume Up");
+        screen.update("Volume Up");
         bleKeyboard.sendConsumerControl(CC_VOLUME_UP);
         delay(BUTTON_COOLDOWN_MS);
     };
 
 void (*volumeDownCallback)() = []() {
         Serial.println("Volume Down");
+        screen.update("Volume Down");
         bleKeyboard.sendConsumerControl(CC_VOLUME_DOWN);
         delay(BUTTON_COOLDOWN_MS);
     };
