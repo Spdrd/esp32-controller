@@ -17,10 +17,17 @@ ScreenPinConfig screenConfig = {
     TFT_SCLK
 };
 
-// --- MANAGERS INSTANCES ---
+// --- MANAGE INSTANCES ---
 BluetoothManager bleKeyboard;
 ButtonManager buttons(buttonConfig);
 ScreenManager screen(screenConfig);
+
+// --- TEST CALLBACKS ---
+void (*displayDaftPunk)() = []() {
+        screen.showJpeg((uint8_t*)ovnitrix_jpg, ovnitrix_jpg_len, OVNNITRIX_WIDTH, OVNNITRIX_HEIGHT);
+    };
+
+// --- MUSIC CONTROLLER CALLBACKS
 void (*playPauseCallback)() = []() {
         Serial.println("Play/Pause");
         screen.update("Play/Pause");
@@ -58,6 +65,7 @@ void (*volumeDownCallback)() = []() {
 ButtonActionCallbacks setupMusicControllerActions(){
     ButtonActionCallbacks buttonActions;
     buttonActions.onDoubleButton1Tap = playPauseCallback;
+    buttonActions.onTripleTap = displayDaftPunk;
     buttonActions.onButton3 = nextTrackCallback;
     buttonActions.onButton2 = previousTrackCallback;
     buttonActions.onButton3_Button1 = volumeUpCallback;

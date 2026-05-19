@@ -3,6 +3,8 @@
 #include "ButtonManager.h"
 #include "BluetoothManager.h"
 #include "ScreenManager.h"
+#include "images/DaftPunk.h"
+#include "images/Ovnnitrix.h"
 
 // --- SCREEN PINS ---
 #define TFT_DC    10
@@ -10,7 +12,7 @@
 #define TFT_SCLK  8   
 
 // --- BUTTON PINS ---
-#define BUTTON1_PIN 5
+#define BUTTON1_PIN 0
 #define BUTTON2_PIN 6
 #define BUTTON3_PIN 7
 

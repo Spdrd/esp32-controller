@@ -17,4 +17,5 @@ public:
     void begin(std::string device_name);
     void sendKey(uint8_t keycode);
     void sendConsumerControl(uint8_t command);
+    void stop();
 };

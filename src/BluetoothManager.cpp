@@ -133,4 +133,18 @@ void BluetoothManager::sendConsumerControl(uint8_t command) {
     inputReport->notify();
 }
 
+void BluetoothManager::stop() {
+
+    // Detener advertising
+    NimBLEDevice::getAdvertising()->stop();
+
+    // Desconectar clientes conectados
+    if (server != nullptr) {
+        server->disconnect(0);
+    }
+
+    // Apagar BLE completamente
+    NimBLEDevice::deinit(true);
+}
+
 

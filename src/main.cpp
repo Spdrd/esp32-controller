@@ -16,6 +16,13 @@ void setup() {
     buttons.begin();
     buttons.setCallbacks(setupMusicControllerActions());
     screen.begin();
+
+    /*
+    delay(2000);
+    
+    delay(2000);
+    screen.update("Ready!");
+    */
 }
 
 void loop() {

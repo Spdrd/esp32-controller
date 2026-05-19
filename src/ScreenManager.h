@@ -1,6 +1,12 @@
+// ScreenManager.h
+
+#pragma once
+#include <SPI.h>
+
 #include <Adafruit_GFX.h>
 #include <Adafruit_GC9A01A.h>
-#include <SPI.h>
+#include <TJpg_Decoder.h>
+
 struct ScreenPinConfig
 {
     int tftCsPin;
@@ -12,13 +18,23 @@ struct ScreenPinConfig
 };
 
 class ScreenManager {
+
 public:
+
     ScreenManager(ScreenPinConfig config);
+
     void begin();
+
     void update(String text);
 
-private:
-    ScreenPinConfig config;
-    Adafruit_GC9A01A tft = Adafruit_GC9A01A(config.tftCsPin, config.tftDcPin, config.tftRstPin);
-};
+    void clear();
 
+    void showJpeg(uint8_t* jpgBuffer, uint32_t jpgSize, int jpg_w, int jpg_h);
+
+    // Necesario para callback JPEG
+    Adafruit_GC9A01A tft;
+
+private:
+
+    ScreenPinConfig config;
+};
